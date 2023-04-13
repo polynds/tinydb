@@ -4,5 +4,11 @@
  * happy coding!!!
  */
 
+use Tinydb\TinyDB;
 
-\Tinydb\TinyDB::open("hhd");
+require_once __DIR__ . '/../vendor/autoload.php';
+
+/** @var \Tinydb\Databases $db */
+$db = TinyDB::open("kj_100");
+$db->table("useres");
+var_dump($db);

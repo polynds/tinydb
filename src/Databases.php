@@ -36,10 +36,10 @@ class Databases
 
     public function table(string $tableName): Table
     {
-        return new Table();
+        return new Table($tableName, $this->dbPath, $this->defaultStorage);
     }
 
-    public function open(?string $dbName, ?StorageType $storageTyp): static
+    public function open(?string $dbName = null, ?StorageType $storageTyp = null): static
     {
         ! is_null($dbName) && $this->dbName = $dbName;
         $this->dbPath = $this->basePath . DIRECTORY_SEPARATOR . $this->dbName;

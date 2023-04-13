@@ -9,11 +9,11 @@ namespace Tinydb;
 use Tinydb\Constant\StorageType;
 
 /**
- * @method static open(?string $dbName, ?StorageType $storageType)
+ * @method static open(?string $dbName = null, ?StorageType $storageType = null):Databases
  */
 class TinyDB
 {
-    protected static ?TinyDB $instance;
+    protected static ?TinyDB $instance = null;
 
     private function __construct()
     {
@@ -30,7 +30,7 @@ class TinyDB
 
     public function getDb(): Databases
     {
-        return new Databases(basename(__DIR__));
+        return new Databases(__DIR__.'/../data');
     }
 
     protected static function getInstance(): TinyDB
