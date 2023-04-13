@@ -10,6 +10,7 @@ use Tinydb\Contract\StorageInterface;
 
 class MemoryStorage implements StorageInterface
 {
+
     public function read(): array
     {
         return [];

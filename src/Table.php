@@ -6,45 +6,36 @@ declare(strict_types=1);
  */
 namespace Tinydb;
 
+use Tinydb\Constant\Table as TableConstant;
 use Tinydb\Contract\StorageInterface;
+use Tinydb\FileSystem\Directory;
 
 class Table
 {
-    protected string $tableName;
+    protected string $tableName = TableConstant::DEFAULT_TABLE_NAME;
+
+    protected string $tablePath = '';
 
     protected StorageInterface $storage;
 
-    public function __construct(string $tableName, StorageInterface $storage)
+    public function __construct(?string $tableName, string $basePath, StorageInterface $storage)
     {
-        $this->tableName = $tableName;
+        ! is_null($tableName) && $this->tableName = $tableName;
+
+        $this->tablePath = $basePath . DIRECTORY_SEPARATOR . $this->tableName;
+
+        Directory::existAndCreate($this->tablePath);
+
         $this->storage = $storage;
     }
 
-    public function insert()
+    public function query(): Query
     {
+        return new Query($this);
     }
 
-    public function all()
+    public function storage(): StorageInterface
     {
-    }
-
-    public function get()
-    {
-    }
-
-    public function update()
-    {
-    }
-
-    public function delete()
-    {
-    }
-
-    public function truncate()
-    {
-    }
-
-    public function count()
-    {
+        return $this->storage;
     }
 }

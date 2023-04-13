@@ -3,3 +3,6 @@
 /**
  * happy coding!!!
  */
+
+
+\Tinydb\TinyDB::open("hhd");
